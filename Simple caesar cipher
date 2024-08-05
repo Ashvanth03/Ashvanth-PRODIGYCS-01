@@ -1,0 +1,39 @@
+def caesar_cipher(text, shift):
+    """
+Encrypt or decrypt a text using Caesar Cipher with a given shift.
+:param text: The input text to encrypt or decrypt.
+:param shift: The number of positions each character is shifted.
+:return: The encrypted or decrypted text.
+result = []
+for char in text:
+if char.isalpha():
+# Determine if character is uppercase or lowercase
+start = ord('A') if char.isupper() else ord('a')
+# Shift character and wrap around using modulo 26
+result.append(chr((ord(char) - start + shift) % 26 + start))
+else:
+# Non-alphabetic characters are added unchanged
+result.append(char)
+return ''.join(result)
+def main():
+while True:
+print("\nCaesar Cipher Program")
+print("1. Encrypt")
+print("2. Decrypt")
+print("3. Exit")
+choice = input("Choose an option (1/2/3): ")
+if choice == '3':
+break
+if choice not in ['1', '2']:
+print("Invalid choice. Please select 1, 2, or 3.")
+continue
+message = input("Enter the message: ")
+shift = int(input("Enter the shift value: "))
+# Adjust shift for decryption
+if choice == '2':
+shift = -shift
+encrypted_decrypted_message = caesar_cipher(message, shift)
+action = "Encrypted" if choice == '1' else "Decrypted"
+print(f"{action} message: {encrypted_decrypted_message}")
+if __name__ == "__main__":
+main()
